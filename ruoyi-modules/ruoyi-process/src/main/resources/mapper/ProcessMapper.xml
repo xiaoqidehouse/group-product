@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.ProcessMapper">
+
+    <resultMap id="BaseResultMap" type="com.ruoyi.domain.Process">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="processTime" column="process_time" jdbcType="DATE"/>
+            <result property="processRecord" column="process_record" jdbcType="VARCHAR"/>
+            <result property="cropId" column="crop_id" jdbcType="INTEGER"/>
+            <result property="processLink" column="process_link" jdbcType="VARCHAR"/>
+            <result property="processTest" column="process_test" jdbcType="VARCHAR"/>
+            <result property="processStatus" column="process_status" jdbcType="VARCHAR"/>
+            <result property="processImg" column="process_img" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,process_time,process_record,
+        crop_id,process_link,process_test,
+        process_status,process_img
+    </sql>
+    <update id="proupById">
+        update process set process_status='1' where id=#{id}
+    </update>
+    <select id="querymes" resultType="com.ruoyi.domain.Process">
+        select p.*,c.type_name
+            from
+            process p
+                left join crop_type c on c.id=p.crop_id
+        <where>
+            <if test="processRecord!=null and processRecord!=''">
+                and instr (process_record,#{processRecord})
+            </if>
+            <if test="cropId!=null">
+                and c.id=#{cropId}
+            </if>
+        </where>
+
+    </select>
+    <select id="nolist" resultType="com.ruoyi.domain.Process">
+        select p.*,c.type_name
+            from
+                process p
+                    left join crop_type c on c.id=p.crop_id
+        where p.process_status='0'
+    </select>
+    <select id="getxy" resultType="com.ruoyi.domain.Process">
+        SELECT process_status  xdata,count(*) ydata  FROM `process` GROUP BY process_status
+    </select>
+    <select id="getbz" resultType="com.ruoyi.domain.BingBaoBiao">
+        SELECT process_status  name,count(*) value  FROM `process` GROUP BY process_status
+    </select>
+</mapper>

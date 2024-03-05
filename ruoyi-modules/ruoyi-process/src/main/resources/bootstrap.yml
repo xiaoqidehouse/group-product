@@ -1,0 +1,51 @@
+server:
+  port: 9777
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9999  # admin 服务地址
+        instance:
+          prefer-ip: true   # 显示IP
+  application:
+    name: ruoyi-pro
+  datasource:
+    url: jdbc:mysql://localhost:3306/pro?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  type-aliases-package: com.bw.SysHt.domain
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.bw.order: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+
+---
+sms:
+  apiUrl: https://sms_developer.zhenzikj.com
+  appId: 113037
+  appSecret: 5c4d0b8a-60f6-4790-a6fc-2313120258d9
+
+#大文件上传配置
+file:
+  domain: http://localhost:${server.port}/
+  path: D:/pic/
+  enable: true
+
+spring:
+  # 图片上传配置
+  servlet:
+    multipart:
+      max-file-size: 1024MB #1次性上传数据量
+      max-request-size: 1024MB #单个文件上传的大
+      enabled: true
+
+
+# 打印mp的sql日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
