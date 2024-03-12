@@ -6,6 +6,7 @@
 
     <div id="container"></div>
 
+
   </div>
 </template>
 
@@ -14,7 +15,7 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 
 export default {
   name: "gaode",
-  data() {ji
+  data() {
     return {
       map: null //初 始化 map 对象
     }

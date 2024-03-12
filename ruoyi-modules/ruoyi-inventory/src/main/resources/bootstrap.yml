@@ -1,5 +1,5 @@
 server:
-  port: 9777
+  port: 9778
 spring:
   boot:
     admin:
@@ -8,9 +8,9 @@ spring:
         instance:
           prefer-ip: true   # 显示IP
   application:
-    name: ruoyi-pro
+    name: ruoyi-inv
   datasource:
-    url: jdbc:mysql://localhost:3306/pro?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -43,6 +43,7 @@ spring:
       max-file-size: 1024MB #1次性上传数据量
       max-request-size: 1024MB #单个文件上传的大
       enabled: true
+
 
 # 打印mp的sql日志
 mybatis-plus:
